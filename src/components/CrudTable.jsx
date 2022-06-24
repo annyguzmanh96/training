@@ -4,6 +4,7 @@ objeto del arreglo y se envía como argumento la key (que toda lista debe tener 
 que se necesita manipular o poseer para cada columna de la tabla acorde al esquema del Crud Planteado
 */
 import { CrudTableRow } from "./CrudTableRow";
+import styles from "./CrudTable.module.css";
 
 export function CrudTable({dataUsers,setDataToEdit,deleteData}){
 

@@ -8,6 +8,7 @@ Posee 2 estados internos: data (base de datos) y dataToEdit(iniciando en null)
 import { useState } from "react";
 import { CrudForm } from "./CrudForm";
 import { CrudTable } from "./CrudTable";
+import styles from './CrudApp.module.css'
 
 const initialUsers=[
     {id:1,
@@ -73,19 +74,23 @@ export function CrudApp(){
 
 
     return(
-        <div>
-            <h2>CRUD APP-PERSONAS/USUARIOS</h2>
-            <CrudForm 
-                createData={createData} 
-                updateData={updateData} 
-                dataToEdit={dataToEdit} 
-                setDataToEdit={setDataToEdit}
-            />
-            <CrudTable 
-                dataUsers={data}  
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
-            />
+        <div className={styles.containerAll}>
+            <div className={styles.crudForm}>
+                <h2>CRUD APP-PERSONAS/USUARIOS</h2>
+                <CrudForm 
+                    createData={createData} 
+                    updateData={updateData} 
+                    dataToEdit={dataToEdit} 
+                    setDataToEdit={setDataToEdit}
+                />
+            </div>
+            <div>
+                <CrudTable 
+                    dataUsers={data}  
+                    setDataToEdit={setDataToEdit}
+                    deleteData={deleteData}
+                />
+            </div>
         </div>
  
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from './CrudForm.module.css';
 
 const initialFormUsers={ //Definiendo el estado inicial del form users (id en null, name y age como ''), esto porque inicalmente no debe tener info pero se debe tener la estructura del form para luego utilizarla
     id: null,
@@ -50,12 +51,12 @@ export function CrudForm({createData,updateData,dataToEdit,setDataToEdit}){ //de
 
 
     return(
-        <div>
+        <div className={styles.containerAll}>
             <h3>{dataToEdit? '¡EDITANDO INFORMACIÓN!':'AGREGAR'}</h3>  {/*Un h3 renderizado condicinal, si existe dataToEdit se renderiza "Editando, si no, "Agregar" */}
                 <form onSubmit={handleSubmit}> {/*form donde el submit depende de la función handleSubmit */}
-                    <input type='text' name='name' placeholder='write the name here...' value={formUsers.name}
+                    <input type='text' name='name' placeholder='Nombre Aquí...' value={formUsers.name}
                      onChange={handleChange}  /> {/*Input para el name*/}
-                    <input type='number' name='age' placeholder='write the age here...' value={formUsers.age} 
+                    <input type='number' name='age' placeholder='Edad Aquí...' value={formUsers.age} 
                      onChange={handleChange}/> {/*Input para la age*/}
                     <button type='submit' value='enviar'>Agregar</button>{/*Botón Agregar*/}
                     <button type='reset' value='limpiar' onClick={handleReset}>Reset</button>{/*Boton Reset*/}
