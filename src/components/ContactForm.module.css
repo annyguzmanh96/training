@@ -3,7 +3,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
-    background-color: rgb(127, 173, 139);
+    background-color: rgb(183, 240, 198);
     margin-top: 2em;
     width: 100%;
     padding-left: 5em; 
@@ -22,3 +22,7 @@ textarea{
     resize: none;
 }
 
+.errors{
+    color: red;
+    font-weight: bold;
+}

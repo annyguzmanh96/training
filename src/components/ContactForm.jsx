@@ -1,7 +1,7 @@
 import { useForm } from "../hooks/useForm";
 import styles from './ContactForm.module.css';
 
-const initialForm={
+const initialForm={ //Forma-Estuctura incial del Form-El atributo "name" de los elementos dispuestos en el form deben tener el mismo nombre que se les defina en este objeto (estrictamente deben coincidir)
     name:'',
     email:'',
     subject:'',
@@ -9,21 +9,22 @@ const initialForm={
    
 };
 
-const validationsForm= (form)=>{
-    let errors={};
+const validationsForm= (form)=>{ //Se define la función validateForm, recibiendo como argumento el form
+    let errors={}; //Se define un objeto errors que servirá de contenedor de errores para cada uno de los campos del form y de esta forma tenga un comportamiento controlado
+    
     //Definición de las regular expressions
-    let regexName= /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-    let regexEmail= /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-    let regexComments= /^.{1,255}$/;
+    let regexName= /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/; //Regex para el campo nombre 
+    let regexEmail= /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/; //Regex para el campo email
+    let regexComments= /^.{1,255}$/; //Regex para el campo comments
 
     //Validaciones Name
-    if(!form.name.trim()){
-        errors.name='* El campo Nombre es Requerido';
-    }else if(!regexName.test(form.name.trim())){
+    if(!form.name.trim()){ // Si no hay nada en el campo "name" de form...[el .trim() elimina los espacios en blanco para evitar tomar un simple espacio como cumplimiento de tener algo en el input]
+        errors.name='* El campo Nombre es Requerido'; // añadiendo un tipo de error al objeto errors para el input 'name'
+    }else if(!regexName.test(form.name.trim())){ //Sino, si (si ya existe algo en el input) se evalúa (test) lo que hay en el form.name y si este es diferente de la expresion regular definida para evaluar el campo, se añade otro tipo de error.
         errors.name='* El campo Nombre sólo acepta letras y espacios en blanco';
     }
 
-    //Validaciones email
+    //Validaciones email-(misma lódgica en todas las validaciones)
     if(!form.email.trim()){
         errors.email='* El campo Email es Requerido';
     }else if(!regexEmail.test(form.email.trim())){
@@ -42,11 +43,11 @@ const validationsForm= (form)=>{
         errors.comments='* El campo sólo acepta 255 caracteres';
     }
 
-    return errors;
+    return errors; //Se retorna el objeto con los errores acorde a las validaciones definidas
 
 };
 
-export function ContactForm(){
+export function ContactForm(){ //Componente ContactForm
     const  {form, 
             errors, 
             loading, 
@@ -55,12 +56,14 @@ export function ContactForm(){
             handleBlur, 
             handleSubmit,
             }   
-            = useForm(initialForm, validationsForm);
+            = useForm(initialForm, validationsForm); // se destructura la hook personalizada que se hizo, 'useForm' para hacer uso de ella y con todos sus elementos lograr renderizar nuevamente el componente
+            
     return(
         <div className={styles.allContainer}>
-            <h2>FORMULARIO DE CONTACTO</h2>
-            <form onSubmit={handleSubmit}>
+             <h2>FORMULARIO DE CONTACTO</h2> {/*Titulo */}
+            <form onSubmit={handleSubmit}> {/*Controlando el Submit*/}
                 <div className={styles.formContainer}>
+                    {/*Input de name*/}
                     <input 
                         type='text' 
                         name='name' 
@@ -71,9 +74,11 @@ export function ContactForm(){
                         required
                     />
 
-                    {errors.name && <p>{errors.name}</p>}
+                    {errors.name && <p className={styles.errors}>{errors.name}</p>} {/*true && true, ejecuta el último true...Existe errors.name...un párrafo con todos los errors.name*/}
 
-                    <input 
+
+                    {/*Misma estructura y lógica para todos los demás campos del form*/}
+                    <input  
                         type='email' 
                         name='email' 
                         placeholder='Escribe tu email aquí' 
@@ -83,7 +88,7 @@ export function ContactForm(){
                         required
                     />
                     
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p className={styles.errors}>{errors.email}</p>}
 
                     <input 
                         type='text' 
@@ -95,7 +100,7 @@ export function ContactForm(){
                         required
                     />
 
-                    {errors.subject && <p>{errors.subject}</p>}
+                    {errors.subject && <p className={styles.errors}>{errors.subject}</p>}
 
                     <textarea 
                         name='comments' 
@@ -108,7 +113,7 @@ export function ContactForm(){
                         required
                     ></textarea>
 
-                    {errors.comments && <p>{errors.comments}</p>}
+                    {errors.comments && <p className={styles.errors}>{errors.comments}</p>}
 
                     <button type='submit'>Enviar</button>
                 </div>
