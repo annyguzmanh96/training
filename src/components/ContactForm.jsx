@@ -1,5 +1,6 @@
 import { useForm } from "../hooks/useForm";
 import styles from './ContactForm.module.css';
+import { Spinner } from "./Spinner";
 
 const initialForm={ //Forma-Estuctura incial del Form-El atributo "name" de los elementos dispuestos en el form deben tener el mismo nombre que se les defina en este objeto (estrictamente deben coincidir)
     name:'',
@@ -117,6 +118,8 @@ export function ContactForm(){ //Componente ContactForm
 
                     <button type='submit'>Enviar</button>
                 </div>
+
+                {loading && <div> <Spinner /></div>}
             </form>
 
         </div>

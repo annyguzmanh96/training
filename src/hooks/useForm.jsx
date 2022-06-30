@@ -2,12 +2,14 @@
 el estado de los errores, los métodos: handleChange, handleBlur y handleSubmit y retorna  todos estos
 */
 import { useState } from "react";
+import { Spinner } from "../components/Spinner";
+
 
 export function useForm (initialForm, validateForm){
     //Estados de la hook
     const [form, setForm]=useState(initialForm); //Controlando el form
     const [errors, setErrors]=useState({}); // Controlando los  errores
-    const [loading, setLoading]=useState(false); //Controlando la carga de un spinner
+    const [loading, setLoading]=useState(false); ////Estado para mostrar en pantalla un spinner mientras se envía el formulario
     const [response, setResponse]=useState(null); //Envío de respuesta
 
     //Métodos de la hook
@@ -22,17 +24,21 @@ export function useForm (initialForm, validateForm){
     const handleBlur=(e)=>{ //Controlando los cambios efectuados cuando el elemento pierda el foco
         setErrors(validateForm(form)); //se setea los errors haciendo uso de la función validateForm (que contiene todas las validaciones del form y va llenando un objeto errors si no se cumplen)
     }
+
+    
+
     const handleSubmit= (e)=>{ //Controlando el envío del form
         e.preventDefault(); //Trabajando una SPA
         setErrors(validateForm(form)); //Validando objeto erros
 
         if(Object.keys(errors).length===0){ //Si el objeto errors está vacío
-            alert('Enviando Formulario'); //se envía el form
+            setLoading(true);
         }else{ //Si no...
             return; //No se retorna nada (no se envía form)
         }
 
     }; 
+
 
     return( //Se retornan los 4 estados y los 3 métodos
         {   
