@@ -1,5 +1,7 @@
+import ChatComponent from '../components/ChatComponent';
 import { ContactForm } from '../components/ContactForm';
 import { CrudApp } from '../components/CrudApp';
+import { MaterialUI } from '../components/MaterialUI';
 import { SearchApp } from '../components/SearchApp';
 
 function App() {
@@ -9,7 +11,8 @@ function App() {
       <CrudApp />
       <ContactForm />
       <SearchApp />
-      
+      <MaterialUI />
+      <ChatComponent />
     </div>
   );
 }
